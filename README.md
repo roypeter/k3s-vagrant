@@ -17,3 +17,8 @@ Node 02
 ```
 curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" K3S_TOKEN=<> sh -s - server --server https://10.10.9.10:6443 --node-ip 10.10.9.12
 ```
+
+Install Nginx ingress
+```
+https://blog.thenets.org/how-to-create-a-k3s-cluster-with-nginx-ingress-controller/
+```
