@@ -36,7 +36,6 @@ Vagrant.configure("2") do |config|
     node.vm.provision "shell", inline: <<-SHELL
       curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - server\
         --server https://10.10.9.10:6443 --node-ip 10.10.9.12 --token-file /vagrant/node-token
-      rm -f /vagrant/node-token
     SHELL
   end
 end
