@@ -26,5 +26,5 @@ helm install grafana bitnami/grafana
 ### Install sample app
 ```
 vagrant ssh node-01
-kubectl appy -f /vagrant/sample-app.yaml
+kubectl apply -f /vagrant/sample-app.yaml
 ```
