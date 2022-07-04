@@ -41,6 +41,11 @@ Vagrant.configure("2") do |config|
       curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s - server\
         --server https://10.10.9.10:6443 --node-ip 10.10.9.12 --node-external-ip 10.10.9.12 --token-file /vagrant/node-token\
         --no-deploy traefik
+      export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+      helm repo add nginx-stable https://helm.nginx.com/stable 
+      helm install nginx-ingress nginx-stable/nginx-ingress \
+      --set controller.hostNetwork=true \
+      --set controller.setAsDefaultIngress=true
     SHELL
   end
 end
