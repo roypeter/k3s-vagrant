@@ -1,30 +1,17 @@
 # K3s cluster setup
+Vagrant file automates following tasks
+- Setup 3 node etcd HA cluster
+- Install Nginx ingress
+- Run a sample demo app with deployment, service and ingress
 
-### Cluster setup
+## Cluster startup
 ```
+# Bring up the Vagrant nodes
 vagrant up
-```
 
-### Install Nginx ingress
-```
-vagrant ssh node-01
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-helm repo add nginx-stable https://helm.nginx.com/stable 
-helm install nginx-ingress nginx-stable/nginx-ingress \
---set controller.hostNetwork=true \
---set controller.setAsDefaultIngress=true
-```
+# Add vm ip to hosts /etc/hosts
+echo '10.10.9.10 foo.bar.com' | sudo tee -a /etc/hosts
 
-### Install Grafana
-```
-vagrant ssh node-01
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install grafana bitnami/grafana
-```
-
-### Install sample app
-```
-vagrant ssh node-01
-kubectl apply -f /vagrant/sample-app.yaml
+# Open below url in your browser
+http://foo.bar.com/
 ```
