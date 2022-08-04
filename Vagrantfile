@@ -68,7 +68,9 @@ Vagrant.configure("2") do |config|
       helm repo add nginx-stable https://helm.nginx.com/stable
       helm install nginx-ingress nginx-stable/nginx-ingress \
         --set controller.hostNetwork=true \
-        --set controller.setAsDefaultIngress=true
+        --set controller.setAsDefaultIngress=true \
+        --set controller.kind=daemonset \
+        --set controller.service.type=""
       kubectl apply -f /vagrant/sample-app.yaml
     SHELL
   end
