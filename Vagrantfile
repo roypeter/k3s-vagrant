@@ -65,12 +65,13 @@ Vagrant.configure("2") do |config|
         --no-deploy traefik \
         --flannel-iface enp0s8
       export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
-      helm repo add nginx-stable https://helm.nginx.com/stable
-      helm install nginx-ingress nginx-stable/nginx-ingress \
-        --set controller.hostNetwork=true \
-        --set controller.setAsDefaultIngress=true \
-        --set controller.kind=daemonset \
-        --set controller.service.type=""
+      helm upgrade --install ingress-nginx ingress-nginx \
+      --repo https://kubernetes.github.io/ingress-nginx \
+      --namespace ingress-nginx --create-namespace \
+      --set controller.hostNetwork=true \
+      --set controller.ingressClassResource.default=true \
+      --set controller.kind="DaemonSet" \
+      --set controller.service.type=""
       kubectl apply -f /vagrant/sample-app.yaml
     SHELL
   end
