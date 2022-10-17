@@ -1,3 +1,4 @@
 .vagrant
 token.txt
 node-token
+*.log
